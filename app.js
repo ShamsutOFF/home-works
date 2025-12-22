@@ -1,12 +1,13 @@
-const addressLat = 10;
-const addressLong = 10;
-const positionLat = 20;
-const positionLong = 20;
+const startBalance = 12000;
+const homePrice = 13500;
+const mounts = 24;
 
-// Просто разница между координатами
-const distance = Math.sqrt(
-    (addressLat - positionLat) ** 2 +
-    (addressLong - positionLong) ** 2
-);
+let newBalance = startBalance * (1 + 0.07 / 12) ** mounts;
 
-console.log(`Расстояние: ${distance}`);
+if (newBalance > homePrice) {
+    console.log(
+        `Congratulations! You can buy the house. Your balance after buy is ${newBalance - homePrice}`
+    );
+}
+
+let foo = 3 > 2 ? "yes" : "no";
