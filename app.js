@@ -8,18 +8,29 @@ function filterAndFormatDates(arr) {
             const dateRegex = /^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/;
             return dateRegex.test(dateStr);
         })
-        // Форматируем даты в нужный формат
+        // Преобразуем строки в объекты дат и фильтруем валидные
         .map(dateStr => {
             // Меняем слэши на дефисы для единообразия
             const normalized = dateStr.replace(/\//g, '-');
-            console.log(normalized);
             const [day, month, year] = normalized.split('-').map(Number);
-            if (year < 1000 || day > 31 || month > 12) {
-                return null;
-            }
-            return normalized;
+
+            // Проверяем валидность даты
+            const date = new Date(year, month - 1, day); // месяц 0-based в JS!
+
+            // Проверяем, что дата корректна и компоненты совпадают
+            return date.getFullYear() === year &&
+            date.getMonth() === month - 1 &&
+            date.getDate() === day ?
+                { day, month, year } : null;
         })
-        .filter(Boolean);
+        // Убираем невалидные даты
+        .filter(dateObj => dateObj !== null)
+        // Форматируем в нужный вид
+        .map(({ day, month, year }) => {
+            // Добавляем ведущие нули и форматируем
+            return `${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`;
+        });
 }
 
 console.log(filterAndFormatDates(dates));
+// Результат: ['10-02-2022', '12-11-2023']
