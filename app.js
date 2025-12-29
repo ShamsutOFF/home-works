@@ -1,11 +1,13 @@
 `use strict`;
 
-// Написать объект ToDoList, который хранит в себе задачи { ‘title’: ‘Помыть посуду’, id: 1, priority: 1 } и имеет методы:
-//
-// Добавить задачу
-// Удалить задачу по id
-// Обновить имя или приоритет по Id
-// Отсортировать задачи по приоритету
+const mainTaskList = {
+    tasks: [{
+        id: 1,
+        name: `тест`,
+        description: `описание`,
+        order: 0
+    }]
+}
 
 const ToDoList = {
     tasks: [],
@@ -27,12 +29,12 @@ const ToDoList = {
         this.tasks = this.tasks.map(task => {
             if (task.id === id) {
                 return {
-                    ...task,           // сохраняем все старые поля
+                    ...task,
                     title: newTitle !== undefined ? newTitle : task.title,
                     priority: newPriority !== undefined ? newPriority : task.priority
                 };
             }
-            return task; // важно: возвращаем неизмененный task!
+            return task;
         });
     },
 
@@ -41,18 +43,25 @@ const ToDoList = {
     },
 }
 
+const mainTaskListMethods = {
+    addTask: ToDoList.addTask.bind(mainTaskList),
+    deleteTask: ToDoList.deleteTask.bind(mainTaskList),
+    updateTask: ToDoList.updateTask.bind(mainTaskList),
+    sortTasksByPriority: ToDoList.sortTasksByPriority.bind(mainTaskList)
+};
+
 // Тестирование
 
-console.log(ToDoList.tasks);
-ToDoList.addTask('Помыть посуду', 1);
-ToDoList.addTask('Пропылесосить', 2);
-ToDoList.addTask('Зарядка', 1);
-console.log(ToDoList.tasks);
+console.log(mainTaskList.tasks);
+mainTaskListMethods.addTask('Помыть посуду', 1);
+mainTaskListMethods.addTask('Пропылесосить', 2);
+mainTaskListMethods.addTask('Зарядка', 1);
+console.log(mainTaskList.tasks);
 
-ToDoList.deleteTask(1);
-console.log(ToDoList.tasks);
+mainTaskListMethods.deleteTask(1);
+console.log(mainTaskList.tasks);
 
-ToDoList.updateTask(2, 'Помыть посуду', 3);
-console.log(ToDoList.tasks);
-ToDoList.sortTasksByPriority();
-console.log(ToDoList.tasks);
+mainTaskListMethods.updateTask(2, 'Помыть посуду', 3);
+console.log(mainTaskList.tasks);
+mainTaskListMethods.sortTasksByPriority();
+console.log(mainTaskList.tasks);
