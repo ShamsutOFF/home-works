@@ -22,13 +22,19 @@ function submitForm() {
     if (!input) {
         return
     }
+    const obj = {
+        text: input
+    }
+    const textJSON = JSON.stringify(obj);
+    localStorage.setItem("text", textJSON);
+    console.log(textJSON);
     document.querySelector(".panel").innerHTML = input;
     document.querySelector(".input").value = "";
     // document.querySelector(".notification").style.display = "block";
     // document.querySelector(".notification").classList.add("notification_active");
     // document.querySelector(".notification").classList.remove("notification_hidden");
 
-    console.log(input)
+    // console.log(input)
 }
 
 function inputChanged(e) {
@@ -36,14 +42,14 @@ function inputChanged(e) {
 }
 
 
-document.querySelectorAll(".one > span").entries().forEach((item) => {
-    item.forEach((item) => {
-        console.log(item.innerHTML)
-    })
-})
-// console.log(document.getElementsByClassName(`one`));
-
-console.log(document.getElementById(`two`).innerText);
-// console.log(document.querySelector("#two").innerText);
-
-console.log(document.querySelector(`[user-id="4"]`).innerText);
+// document.querySelectorAll(".one > span").entries().forEach((item) => {
+//     item.forEach((item) => {
+//         console.log(item.innerHTML)
+//     })
+// })
+// // console.log(document.getElementsByClassName(`one`));
+//
+// console.log(document.getElementById(`two`).innerText);
+// // console.log(document.querySelector("#two").innerText);
+//
+// console.log(document.querySelector(`[user-id="4"]`).innerText);
