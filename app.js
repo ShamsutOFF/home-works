@@ -24,9 +24,26 @@ function submitForm() {
     }
     document.querySelector(".panel").innerHTML = input;
     document.querySelector(".input").value = "";
+    // document.querySelector(".notification").style.display = "block";
+    // document.querySelector(".notification").classList.add("notification_active");
+    // document.querySelector(".notification").classList.remove("notification_hidden");
+
     console.log(input)
 }
 
 function inputChanged(e) {
     if (e.key === "Enter") submitForm("click");
 }
+
+
+document.querySelectorAll(".one > span").entries().forEach((item) => {
+    item.forEach((item) => {
+        console.log(item.innerHTML)
+    })
+})
+// console.log(document.getElementsByClassName(`one`));
+
+console.log(document.getElementById(`two`).innerText);
+// console.log(document.querySelector("#two").innerText);
+
+console.log(document.querySelector(`[user-id="4"]`).innerText);
