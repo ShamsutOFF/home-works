@@ -26,6 +26,10 @@ function submitForm() {
         text: input
     }
     const textJSON = JSON.stringify(obj);
+    // var2
+    localStorage.setItem("text2", JSON.stringify({
+        text: input
+    }));
     localStorage.setItem("text", textJSON);
     console.log(textJSON);
     document.querySelector(".panel").innerHTML = input;
@@ -53,3 +57,5 @@ function inputChanged(e) {
 // // console.log(document.querySelector("#two").innerText);
 //
 // console.log(document.querySelector(`[user-id="4"]`).innerText);
+
+document.querySelector(`[user-id="4"]`).getAttribute('data-userid')
